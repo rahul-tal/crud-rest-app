@@ -1,10 +1,10 @@
-import express from 'express'
+import  express from 'express'
 import mongoose from 'mongoose'
-import router from './routes/users'
+import router from './routes/route'
 const app = express()
 
-const databaseUrl = 'mongodb://localhost/users'
-const httpPort = 3000
+const databaseUrl = 'mongodb://127.0.0.1:27017/users'
+const httpPort =  3000
 
 mongoose.connect(databaseUrl)
 const db = mongoose.connection
