@@ -1,4 +1,4 @@
-export {getUsers, getUserById} from './getUsers'
-export {createUser} from './createUser'
-export {updateUser} from './updateUsers'
-export {deleteUser} from './deleteUser'
+export { getUsersHandler, getUserByIdHandler} from './getUsers'
+export { createUserHandler } from './createUser'
+export { updateUserHandler } from './updateUsers'
+export { deleteUserHandler } from './deleteUser'

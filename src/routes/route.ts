@@ -1,18 +1,17 @@
 import express from 'express'
-import {getUser} from '../middleware/'
-import { createUser, deleteUser, getUserById, getUsers, updateUser } from '../services'
+import { createUserHandler, deleteUserHandler, getUserByIdHandler, getUsersHandler, updateUserHandler } from '../services'
 
 const router = express.Router()
 
 
-router.get('/',getUsers)
+router.get('/', getUsersHandler)
 
-router.get('/:id', getUser, getUserById)
+router.get('/:id', getUserByIdHandler)
 
-router.post('/', createUser)
+router.post('/', createUserHandler)
 
-router.patch('/:id', getUser, updateUser)
+router.patch('/:id', updateUserHandler)
 
-router.delete('/:id', getUser, deleteUser)
+router.delete('/:id', deleteUserHandler)
 
 export default router

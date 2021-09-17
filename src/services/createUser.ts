@@ -1,6 +1,8 @@
 import Users from "../models/users"
+import { Request } from 'express'
+import { AppResponse } from "../types/app.types"
 
-export const createUser = async(req:any,res:any)=>{
+export const createUserHandler = async(req:Request,res:AppResponse)=>{
     const user = new Users({
         name: req.body.name,
         age: req.body.age,

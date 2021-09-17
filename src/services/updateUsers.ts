@@ -1,18 +1,35 @@
-export const updateUser = async(req:any,res:any)=>{
-    if (req.body.name != null) {
-        res.user.name = req.body.name
-      }
-    if (req.body.age != null) {
-        res.user.age = req.body.age
-      }
+import Users from "../models/users"
+import {Request } from 'express'
+import { AppResponse } from "../types/app.types"
+
+export const updateUserHandler = async(req:Request,res:AppResponse)=>{
+  let user: Record<string,any> | null
+   try{
+       user = await Users.findById(req.params.id)
+      if(user === null )
+        return res.status(404).json({message: 'Cannot find the user'})
+      
+    }
+    catch(err){
+      return res.status(500).json({error: err})
+     }  
     
-    if (req.body.email != null) {
-        res.user.email = req.body.email
-      }
+   if (req.body.name != null) {
+      user.name = req.body.name
+    }
+
+   if (req.body.age != null) {
+      user.age = req.body.age
+    }
+
+   if (req.body.email != null) {
+      user.email = req.body.email
+    }
+    
       try {
-        const updatedUser = await res.user.save()
+        const updatedUser = await user.save()
         res.json(updatedUser)
-      } catch (err) {
-        res.status(400).json({ err })
+      } catch (err:any) {
+        res.status(400).json({ message: err.message ?? err })
       }
 }
