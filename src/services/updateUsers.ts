@@ -1,8 +1,12 @@
 import Users from "../models/users"
 import {Request } from 'express'
 import { AppResponse } from "../types/app.types"
+import { logger } from "../logger/logger"
+import { LogLevels } from "../types/logger.types"
 
 export const updateUserHandler = async(req:Request,res:AppResponse)=>{
+
+  logger.log({level: LogLevels.INFO, message: `${req.method} request to /users${req.path}`} )
   let user: Record<string,any> | null
    try{
        user = await Users.findById(req.params.id)
@@ -11,6 +15,7 @@ export const updateUserHandler = async(req:Request,res:AppResponse)=>{
       
     }
     catch(err){
+      logger.log({level:LogLevels.ERROR, message:`${err}` })
       return res.status(500).json({error: err})
      }  
     
@@ -30,6 +35,7 @@ export const updateUserHandler = async(req:Request,res:AppResponse)=>{
         const updatedUser = await user.save()
         res.json(updatedUser)
       } catch (err:any) {
+        logger.log({level:LogLevels.ERROR, message:`${err}` })
         res.status(400).json({ message: err.message ?? err })
       }
 }
