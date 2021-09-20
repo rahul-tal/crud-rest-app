@@ -3,6 +3,7 @@ import  express from 'express'
 import mongoose from 'mongoose'
 import { createMongoDatabase } from './infra/database'
 import { logger } from './logger/logger'
+import { verifyToken } from './middleware/jwtAuthentication'
 import router from './routes/route'
 import { LogLevels } from './types/logger.types'
 
@@ -14,7 +15,7 @@ const httpPort =  process.env.HTTP_PORT || 3000
 
 createMongoDatabase({databaseUrl}, mongoose).connect(logger)
 app.use(express.json())
-app.use('/users', router)
+app.use('/users' , router)
 
 app.listen(httpPort, ()=>{
 logger.log({ level: LogLevels.INFO, message: `App running on ${httpPort}`})

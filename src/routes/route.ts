@@ -1,17 +1,23 @@
 import express from 'express'
-import { createUserHandler, deleteUserHandler, getUserByIdHandler, getUsersHandler, updateUserHandler } from '../services'
+import { verifyToken } from '../middleware/jwtAuthentication'
+import { createUserHandler, deleteUserHandler, getUserByIdHandler, getUsersHandler, loginHandler, registerHandler, updateUserHandler } from '../services'
+
 
 const router = express.Router()
 
 
-router.get('/', getUsersHandler)
+router.get('/', verifyToken, getUsersHandler)
 
-router.get('/:id', getUserByIdHandler)
+router.get('/:id', verifyToken, getUserByIdHandler)
 
-router.post('/', createUserHandler)
+router.post('/', verifyToken, createUserHandler)
 
-router.patch('/:id', updateUserHandler)
+router.patch('/:id', verifyToken, updateUserHandler)
 
-router.delete('/:id', deleteUserHandler)
+router.delete('/:id',verifyToken,  deleteUserHandler)
+
+router.post('/register', registerHandler)
+
+router.post('/login', loginHandler)
 
 export default router

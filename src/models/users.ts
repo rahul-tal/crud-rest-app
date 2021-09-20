@@ -1,25 +1,14 @@
-import mongoose from 'mongoose'
+import { model, Schema, Model} from 'mongoose'
+import { IUser } from '../infra/database.types';
 
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    age: {
-        type: Number,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        required: true,
-        default: Date.now
-    }
+const UserSchema: Schema = new Schema({
+    email: { type: String, required: true },
+    name: { type: String, required: true },
+    age: {type: Number, required: true},
+    password: {type: String, required: true},
+    token: { type: String },
+  });
 
-})
+const User: Model<IUser> = model('Users', UserSchema)
 
-const Users = mongoose.model('Users', userSchema)
-export default Users
+export default User
