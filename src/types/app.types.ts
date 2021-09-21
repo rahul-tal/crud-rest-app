@@ -1,6 +1,6 @@
-import {Response} from 'express'
+import { Response } from 'express'
 import { IUser } from '../infra/database.types'
 
-export type AppResponse =   Response & {
-user?: IUser
+export type AppResponse = Response & {
+    user?: IUser
 }

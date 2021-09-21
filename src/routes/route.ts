@@ -14,7 +14,7 @@ router.post('/', verifyToken, createUserHandler)
 
 router.patch('/:id', verifyToken, updateUserHandler)
 
-router.delete('/:id',verifyToken,  deleteUserHandler)
+router.delete('/:id', verifyToken, deleteUserHandler)
 
 router.post('/register', registerHandler)
 
