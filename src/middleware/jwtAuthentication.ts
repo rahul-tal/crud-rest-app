@@ -7,11 +7,13 @@ import { LogLevels } from "../types/logger.types";
 const config = process.env;
 
 export const verifyToken = async (req: Request, res: AppResponse, next: NextFunction ) => {
-  const token =
-    req.body.token || req.query.token || req.headers["x-access-token"];
+  const userToken =
+    req.body.token || req.query.token || req.headers["x-access-token"]
+    
+  const token = userToken.split(' ')[1]
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(403).send("A token is required for authentication")
   }
 
   try {

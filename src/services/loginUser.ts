@@ -1,5 +1,4 @@
 import { Request } from "express"
-import bcrypt from 'bcrypt'
 import Users from "../models/users"
 import jwt from 'jsonwebtoken'
 import { logger } from "../logger/logger"

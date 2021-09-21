@@ -18,7 +18,9 @@ try{
     if(oldUser)
     return res.status(409).send('User already present, please use a different login id or login')
     
-
+    //TODO
+    // password should be encrypted before storing in db
+    // find a better way which doesn't involve storing password in db
     const user = await Users.create({
         name,
         email: email.toLowerCase(),
