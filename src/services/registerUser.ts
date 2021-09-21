@@ -1,5 +1,4 @@
 import { Request, Response } from "express"
-import bcrypt from 'bcrypt'
 import Users from "../models/users"
 import jwt from 'jsonwebtoken'
 import { logger } from "../logger/logger"
@@ -20,7 +19,6 @@ try{
     
     //TODO
     // password should be encrypted before storing in db
-    // find a better way which doesn't involve storing password in db
     const user = await Users.create({
         name,
         email: email.toLowerCase(),
@@ -32,7 +30,9 @@ try{
         throw new Error('Token key missing in config')
 
     const token = jwt.sign({user_id: user._id, email}, process.env.TOKEN_KEY, {expiresIn: "2h"})
-
+    //TODO:
+    // A better way would be to not store token in db instead fetch a key from JWKS_SERVICE_URL and 
+    // then verfiy if token in request was signed by the key
     user.token = token
     res.status(201).json(user)
 }

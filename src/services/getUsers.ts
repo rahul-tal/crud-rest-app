@@ -3,7 +3,6 @@ import {Request, Response} from 'express'
 import { AppResponse } from '../types/app.types'
 import { logger } from '../logger/logger'
 import { LogLevels } from '../types/logger.types'
-import User from '../models/users'
 
 export const getUsersHandler = async(req:Request,res:Response) =>{
     logger.log({level: LogLevels.INFO, message: `${req.method} request to /users${req.path}`} )

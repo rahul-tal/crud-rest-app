@@ -3,7 +3,6 @@ import  express from 'express'
 import mongoose from 'mongoose'
 import { createMongoDatabase } from './infra/database'
 import { logger } from './logger/logger'
-import { verifyToken } from './middleware/jwtAuthentication'
 import router from './routes/route'
 import { LogLevels } from './types/logger.types'
 

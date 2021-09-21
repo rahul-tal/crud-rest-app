@@ -16,7 +16,7 @@ return `${level}: ${color[level] || ''} || ${timestamp} || ${message}\x1b[0m `;
 
 
 export const logger = winston.createLogger({
-    level: process.env.LOG_LEVEL||LogLevels.INFO,
+    level: process.env.LOG_LEVEL || LogLevels.INFO,
     format: combine(
         winston.format.prettyPrint(),
         winston.format.metadata(),
